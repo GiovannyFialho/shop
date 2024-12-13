@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #fff;
+  --gray900: #121214;
+  --gray800: #202024;
+  --gray300: #c4c4cc;
+  --gray100: #e1e1e6;
+  --green500: #00875f;
+  --green300: #00b37e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #0d0d0d;
+    --gray900: #0b0b0c;
+    --gray800: #151516;
+    --gray300: #8a8a92;
+    --gray100: #a1a1a6;
+    --green500: #006b4a;
+    --green300: #00865e;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: var(--foreground);
+  background: var(--gray900);
+}

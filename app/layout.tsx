@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
-import "@/src/app/globals.css";
+import "@/app/styles/globals.css";
+
+import { Header } from "@/app/components/Header";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -20,7 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <head>
+        <link rel="icon" href="/ignite-simbol.svg" type="image/svg+xml" />
+      </head>
+
+      <body className={roboto.className}>
+        <div className="flex min-h-screen flex-col items-start justify-center">
+          <Header />
+
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
