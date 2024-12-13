@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "custom-gradient": "linear-gradient(180deg, #1ea483 0%, #7465d4 100%)",
+        "black-opacity-60": "rgba(0, 0, 0, 0.6)",
+      },
       colors: {
         foreground: "var(--foreground)",
         gray900: "var(--gray900)",
