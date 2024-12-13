@@ -1,3 +1,7 @@
+"use client";
+
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
 
 import Shirt1 from "@/app/assets/images/products/1camiseta.png";
@@ -6,11 +10,21 @@ import Shirt3 from "@/app/assets/images/products/3camiseta.png";
 import Shirt4 from "@/app/assets/images/products/4camiseta.png";
 
 export default function Home() {
+  const [sliderRef] = useKeenSlider({
+    slides: {
+      perView: 2.5,
+      spacing: 48,
+    },
+  });
+
   return (
-    <main className="ml-auto flex w-full max-w-[calc(100vw-((100vw-1180px)/2))] gap-12">
+    <main
+      ref={sliderRef}
+      className="keen-slider ml-auto flex min-h-[400px] max-w-[calc(100vw-((100vw-1180px)/2))]"
+    >
       <a
         href="#"
-        className="bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg p-1"
+        className="keen-slider__slide bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg"
       >
         <Image
           src={Shirt1}
@@ -28,7 +42,7 @@ export default function Home() {
 
       <a
         href="#"
-        className="bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg p-1"
+        className="keen-slider__slide bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg"
       >
         <Image
           src={Shirt2}
@@ -46,7 +60,7 @@ export default function Home() {
 
       <a
         href="#"
-        className="bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg p-1"
+        className="keen-slider__slide bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg"
       >
         <Image
           src={Shirt3}
@@ -64,7 +78,7 @@ export default function Home() {
 
       <a
         href="#"
-        className="bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg p-1"
+        className="keen-slider__slide bg-custom-gradient group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg"
       >
         <Image
           src={Shirt4}
