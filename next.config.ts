@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "files.stripe.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
