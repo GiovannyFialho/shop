@@ -11,10 +11,28 @@ interface MetadataProps {
 }
 
 export async function generateMetadata({ params }: MetadataProps) {
+  const product = await fetchProduct(params.id);
+  const price = product.default_price as Stripe.Price;
+
+  const formatPrice = price.unit_amount
+    ? new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(price.unit_amount / 100)
+    : 0;
+
   return {
-    title: `Produto ${params.id}`,
-    description: "salve",
+    title: `Camiseta ${product.name}`,
+    description: `${product.name} | ${formatPrice}`,
   };
+}
+
+async function fetchProduct(id: string) {
+  const product = await stripe.products.retrieve(id, {
+    expand: ["default_price"],
+  });
+
+  return product;
 }
 
 export default async function ProductPage({
@@ -22,11 +40,7 @@ export default async function ProductPage({
 }: {
   params: { id: string };
 }) {
-  const { id } = params;
-
-  const product = await stripe.products.retrieve(id, {
-    expand: ["default_price"],
-  });
+  const product = await fetchProduct(params.id);
 
   const price = product.default_price as Stripe.Price;
 
