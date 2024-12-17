@@ -1,24 +1,38 @@
-import Link from "next/link";
+import Stripe from "stripe";
 
-export default function Success() {
+import { stripe } from "@/app/lib/stripe";
+
+import { SuccessContent } from "@/app/components/SuccessContent";
+interface SuccessPageProps {
+  searchParams: { session_id?: string };
+}
+
+export default async function Success({ searchParams }: SuccessPageProps) {
+  const sessionId = searchParams.session_id;
+
+  if (sessionId) {
+    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+      expand: ["line_items", "line_items.data.price.product"],
+    });
+
+    const costumerName = session.customer_details?.name;
+    const product = session.line_items?.data[0].price
+      ?.product as Stripe.Product;
+
+    return (
+      <SuccessContent
+        costumerName={costumerName}
+        product={{
+          name: product.name,
+          imageUrl: product.images[0],
+        }}
+      />
+    );
+  }
+
   return (
-    <div className="mx-auto my-0 flex h-full flex-col items-center">
-      <h1 className="text-2xl text-gray-100">Compra efetuada</h1>
-
-      <div className="mt-16 flex h-[145px] w-full max-w-[130px] items-center justify-center rounded-lg bg-custom-gradient p-1"></div>
-
-      <p className="mt-8 max-w-[560px] text-center text-xl text-gray-300">
-        Uhuul <strong>Giovanny Fialho</strong>, sua{" "}
-        <strong>Camiseta Beyond the Limits</strong> já está a caminho da sua
-        casa.
-      </p>
-
-      <Link
-        href="/"
-        className="mt-20 block text-lg font-bold text-green-500 hover:text-green-300"
-      >
-        Voltar ao catálogo
-      </Link>
+    <div className="flex h-full min-h-[calc(100vh-116px)] w-full items-center justify-center">
+      <p className="text-2xl">Nenhum item encontrado 😔</p>
     </div>
   );
 }

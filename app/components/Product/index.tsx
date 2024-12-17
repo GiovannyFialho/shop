@@ -38,7 +38,7 @@ export function Product({ product }: ProductProps) {
   }
 
   return (
-    <main className="mx-auto my-0 grid max-w-[1180px] grid-cols-2 items-stretch gap-16 pb-8">
+    <main className="mx-auto my-0 grid min-h-[calc(100vh-116px)] max-w-[1180px] grid-cols-2 items-stretch gap-16 pb-8">
       <div className="flex h-[calc(600px-0.5rem)] w-full max-w-[576px] items-center justify-center rounded-lg bg-custom-gradient p-1">
         <Image
           src={product.imageUrl}

@@ -25,7 +25,7 @@ export function HomeListProducts({ products }: HomeListProductsProps) {
   return (
     <main
       ref={sliderRef}
-      className="keen-slider ml-auto flex min-h-[600px] max-w-[calc(100vw-((100vw-1180px)/2))] pb-8"
+      className="keen-slider ml-auto flex min-h-[calc(100vh-116px)] max-w-[calc(100vw-((100vw-1180px)/2))] pb-8"
     >
       {products.map((product) => (
         <Link
