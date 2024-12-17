@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import Stripe from "stripe";
 
 import { stripe } from "@/app/lib/stripe";
@@ -10,29 +11,24 @@ interface SuccessPageProps {
 export default async function Success({ searchParams }: SuccessPageProps) {
   const sessionId = searchParams.session_id;
 
-  if (sessionId) {
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ["line_items", "line_items.data.price.product"],
-    });
-
-    const costumerName = session.customer_details?.name;
-    const product = session.line_items?.data[0].price
-      ?.product as Stripe.Product;
-
-    return (
-      <SuccessContent
-        costumerName={costumerName}
-        product={{
-          name: product.name,
-          imageUrl: product.images[0],
-        }}
-      />
-    );
+  if (!sessionId) {
+    redirect("/");
   }
 
+  const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ["line_items", "line_items.data.price.product"],
+  });
+
+  const costumerName = session.customer_details?.name;
+  const product = session.line_items?.data[0].price?.product as Stripe.Product;
+
   return (
-    <div className="flex h-full min-h-[calc(100vh-116px)] w-full items-center justify-center">
-      <p className="text-2xl">Nenhum item encontrado 😔</p>
-    </div>
+    <SuccessContent
+      costumerName={costumerName}
+      product={{
+        name: product.name,
+        imageUrl: product.images[0],
+      }}
+    />
   );
 }
