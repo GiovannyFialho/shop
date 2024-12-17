@@ -60,7 +60,7 @@ export function Product({ product }: ProductProps) {
         <button
           type="button"
           onClick={handleBuyProduct}
-          className="group mt-auto cursor-pointer rounded-lg border-0 bg-green-500 p-5 text-base font-bold text-white transition-all duration-300 hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60 group-disabled:hover:bg-transparent"
+          className=":hover:bg-transparent group mt-auto cursor-pointer rounded-lg border-0 bg-green-500 p-5 text-base font-bold text-white transition-all duration-300 hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={isCreatingCheckoutSession}
         >
           Comprar agora
