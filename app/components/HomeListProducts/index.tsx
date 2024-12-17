@@ -42,7 +42,7 @@ export function HomeListProducts({ products }: HomeListProductsProps) {
           />
 
           <footer className="absolute bottom-1 left-1 right-1 flex translate-y-[110%] items-center justify-between rounded-md bg-black bg-opacity-60 p-8 opacity-0 transition-all duration-300 ease-in-out group-hover:translate-y-0 group-hover:opacity-100">
-            <strong className="text-lg">{product.name}</strong>
+            <strong className="text-lg text-gray-100">{product.name}</strong>
             <span className="text-xl font-bold text-green-300">
               {product.price}
             </span>
