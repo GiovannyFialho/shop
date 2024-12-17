@@ -43,6 +43,7 @@ export default async function ProductPage({
               currency: "BRL",
             }).format(price.unit_amount / 100)
           : 0,
+        defaultPriceId: price.id,
       }}
     />
   );
