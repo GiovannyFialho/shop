@@ -3,6 +3,7 @@
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface HomeListProductsProps {
   products: {
@@ -27,9 +28,9 @@ export function HomeListProducts({ products }: HomeListProductsProps) {
       className="keen-slider ml-auto flex min-h-[400px] max-w-[calc(100vw-((100vw-1180px)/2))]"
     >
       {products.map((product) => (
-        <a
+        <Link
           key={product.id}
-          href="#"
+          href={`/products/${product.id}`}
           className="keen-slider__slide group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-custom-gradient"
         >
           <Image
@@ -46,7 +47,7 @@ export function HomeListProducts({ products }: HomeListProductsProps) {
               {product.price}
             </span>
           </footer>
-        </a>
+        </Link>
       ))}
     </main>
   );
