@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { CartItem } from "@/app/context/cart";
 import { stripe } from "@/app/lib/stripe";
-import { CartItem } from "../../context/cart";
 
 export async function POST(request: NextRequest) {
   const data = await request.json();
