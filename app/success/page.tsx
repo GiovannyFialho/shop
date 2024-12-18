@@ -20,15 +20,18 @@ export default async function Success({ searchParams }: SuccessPageProps) {
   });
 
   const costumerName = session.customer_details?.name;
-  const product = session.line_items?.data[0].price?.product as Stripe.Product;
+  const products = session.line_items?.data.map((item) => {
+    const product = item.price?.product as Stripe.Product;
+
+    return {
+      id: product.id,
+      name: product.name,
+      imageUrl: product.images[0],
+      quantity: item.quantity,
+    };
+  });
 
   return (
-    <SuccessContent
-      costumerName={costumerName}
-      product={{
-        name: product.name,
-        imageUrl: product.images[0],
-      }}
-    />
+    <SuccessContent costumerName={costumerName} products={products || []} />
   );
 }

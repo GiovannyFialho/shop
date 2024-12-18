@@ -3,6 +3,8 @@ import { Roboto } from "next/font/google";
 
 import "@/app/styles/globals.css";
 
+import { CartProvider } from "@/app/context/cart";
+
 import { Header } from "@/app/components/Header";
 
 const roboto = Roboto({
@@ -30,7 +32,7 @@ export default function RootLayout({
         <div className="flex min-h-screen flex-col items-start justify-center">
           <Header />
 
-          {children}
+          <CartProvider>{children}</CartProvider>
         </div>
       </body>
     </html>

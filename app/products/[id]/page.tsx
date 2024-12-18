@@ -51,12 +51,7 @@ export default async function ProductPage({
         name: product.name,
         description: product.description,
         imageUrl: product.images[0],
-        price: price.unit_amount
-          ? new Intl.NumberFormat("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            }).format(price.unit_amount / 100)
-          : 0,
+        price: price.unit_amount,
         defaultPriceId: price.id,
       }}
     />

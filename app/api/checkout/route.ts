@@ -1,23 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { stripe } from "@/app/lib/stripe";
+import { CartItem } from "../../context/cart";
 
 export async function POST(request: NextRequest) {
   const data = await request.json();
-  const { priceId } = data;
+  const { cartItems } = data;
 
-  if (!priceId) {
+  if (!cartItems) {
     return NextResponse.json({ message: "Price not found" }, { status: 400 });
   }
 
+  const lineItems = cartItems.map((item: CartItem) => ({
+    price: item.defaultPriceId,
+    quantity: item.quantity,
+  }));
+
   const checkoutSession = await stripe.checkout.sessions.create({
     mode: "payment",
-    line_items: [
-      {
-        price: priceId,
-        quantity: 1,
-      },
-    ],
+    line_items: lineItems,
     success_url: `${process.env.NEXT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_URL}/`,
   });
