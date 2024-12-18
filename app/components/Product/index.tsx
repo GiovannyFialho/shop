@@ -24,6 +24,7 @@ export function Product({ product }: ProductProps) {
   async function handleBuyProduct() {
     try {
       setIsCreatingCheckoutSession(true);
+      setShowCart(true);
 
       const response = await axios.post("/api/checkout", {
         priceId: product.defaultPriceId,
@@ -67,7 +68,7 @@ export function Product({ product }: ProductProps) {
           className=":hover:bg-transparent group mt-auto cursor-pointer rounded-lg border-0 bg-green-500 p-5 text-base font-bold text-white transition-all duration-300 hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={isCreatingCheckoutSession}
         >
-          Comprar agora
+          Colocar na sacola
         </button>
       </div>
 
